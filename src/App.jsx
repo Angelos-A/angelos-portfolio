@@ -56,7 +56,7 @@ export default function App() {
           <div>
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-sm font-semibold mb-6">
               <span className="flex h-2 w-2 rounded-full bg-blue-600 mr-2"></span>
-              Available for New Opportunities
+              Available for Opportunities
             </div>
             <h1 className="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-4">
               Angelos Artemiou
