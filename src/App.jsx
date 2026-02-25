@@ -333,6 +333,85 @@ export default function App() {
                 </div>
               </div>
             </div>
+                
+              <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col group hover:shadow-md transition-shadow">
+              <div className="aspect-video bg-slate-100 relative overflow-hidden flex items-center justify-center">
+                <img 
+                  src="/Rover.png" 
+                  alt="PCB Electronics" 
+                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Multi-Sensor Wi-Fi Rover (Personal Project)</h3>
+                <ul className="list-disc pl-4 text-slate-600 text-sm mb-4 flex-grow space-y-1.5 marker:text-blue-500">
+                 <li><strong>Implementation & Tech Stack:</strong>
+                    <ul>
+                        <li><em>Mechanical Design:</em> Architected the custom chassis, wheel assemblies, and sensor mounts using <strong>SolidWorks</strong>, and fabricated the physical prototype via FDM <strong>3D printing</strong>.</li>
+                        <li><em>Embedded Firmware:</em> Engineered the control firmware in <strong>C</strong> (Arduino + Adafruit WiFi shield), integrating a multi-sensor array (433MHz RF, Infrared, and Ultrasonic) for spatial and signal detection.</li>
+                        <li><em>Mobile Interface & Comms:</em> Developed a custom <strong>Python script (TKinter)</strong> to serve as the primary GUI and interface with the Arduino. Established a low-latency <strong>Wi-Fi</strong> telemetry link (TCP/UDP) for real-time remote control and sensor data visualization.</li>
+                    </ul>
+                </li>
+                     </ul>
+                <div className="pt-4 border-t border-slate-100 mt-auto">
+
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col group hover:shadow-md transition-shadow">
+              <div className="aspect-video bg-slate-100 relative overflow-hidden flex items-center justify-center">
+                <img 
+                  src="/waveform.jpg" 
+                  alt="PCB Electronics" 
+                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Mini Music Synthesizer (Personal Project)</h3>
+                <ul className="list-disc pl-4 text-slate-600 text-sm mb-4 flex-grow space-y-1.5 marker:text-blue-500">
+                 <li><strong>Implementation & Tech Stack:</strong>
+                  <ul>
+                    <li><em>Synthesis Engine:</em> Engineered a <strong>Numerically Controlled Oscillator (NCO)</strong> using <strong>Phase Accumulation</strong> to read from waveform Look-Up Tables (LUTs). Implemented real-time frequency scaling for multi-octave performance.</li>
+                    <li><em>Multitasking:</em> Utilized <strong>FreeRTOS</strong> to manage asynchronous tasks, ensuring the high-priority audio interrupt service routine (ISR) remained jitter-free while simultaneously processing user input from the keyboard module.</li>
+                    <li><em>Signal Modulation:</em> Developed a software-based <strong>Low-Frequency Oscillator (LFO)</strong> to modulate the phase increment, creating a realistic <strong>Vibrato</strong> effect.</li>
+                    <li><em>Networking:</em> Implemented a <strong>UART-based communication protocol</strong> to allow synchronization and note-sharing between multiple synthesizer units.</li>
+                </ul>
+              </li>
+                     </ul>
+                <div className="pt-4 border-t border-slate-100 mt-auto">
+
+                </div>
+              </div>
+            </div>
+
+             <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col group hover:shadow-md transition-shadow">
+              <div className="aspect-video bg-slate-100 relative overflow-hidden flex items-center justify-center">
+                <img 
+                  src="/nas.jpg" 
+                  alt="NAS" 
+                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Custom Network Attached Storage (NAS) & Private Cloud (Personal Project)</h3>
+                <ul className="list-disc pl-4 text-slate-600 text-sm mb-4 flex-grow space-y-1.5 marker:text-blue-500">
+                 <li><strong>Implementation & Tech Stack:</strong>
+                  <ul>
+                      <li><em>Secure Remote Infrastructure:</em> Set up an encrypted remote-access pipeline using <strong>Tailscale</strong>, allowing for secure, low-latency file synchronization from external networks without exposing local ports to the public internet.</li>
+                      
+                      <li><em>Network Protocol Optimization:</em> Configured and tuned <strong>SMB/CIFS and NFS</strong> shares for cross-platform compatibility. Optimized I/O throughput by managing USB 3.0 bus contention and implementing filesystem-level performance tweaks.</li>
+                      <li><em>System Administration:</em> Automated system maintenance via <strong>Cron jobs</strong> for rsync backups and monitored hardware health using <strong>S.M.A.R.T.</strong> diagnostic tools to ensure 99.9% data uptime.</li>
+                  </ul>
+              </li>
+                     </ul>
+                <div className="pt-4 border-t border-slate-100 mt-auto">
+
+                </div>
+              </div>
+            </div>
+
+            
 
           </div>
         </div>
@@ -343,7 +422,7 @@ export default function App() {
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center mb-12">
             <Cpu className="w-8 h-8 text-blue-600 mr-4" />
-            <h2 className="text-3xl font-bold text-slate-900">Tech Stack</h2>
+            <h2 className="text-3xl font-bold text-slate-900">Technical Expertise</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
