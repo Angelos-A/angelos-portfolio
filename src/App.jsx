@@ -2,11 +2,49 @@ import React, { useState, useEffect } from 'react';
 import { 
   Mail, Phone, MapPin, ExternalLink, ChevronRight, 
   Briefcase, GraduationCap, Award, BookOpen, Cpu, Code, Activity, ShieldCheck,
-  FolderKanban, Download
+  FolderKanban, Download, CheckCircle2
 } from 'lucide-react';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
+  
+  // --- MINI-GAME STATE ---
+  const [foundCores, setFoundCores] = useState([]);
+  const [showWinMessage, setShowWinMessage] = useState(false);
+
+  // Check for win condition
+  useEffect(() => {
+    if (foundCores.length === 5) {
+      setShowWinMessage(true);
+      const timer = setTimeout(() => setShowWinMessage(false), 6000);
+      return () => clearTimeout(timer);
+    }
+  }, [foundCores]);
+
+  const handleFindCore = (id) => {
+    if (!foundCores.includes(id)) {
+      setFoundCores(prev => [...prev, id]);
+    }
+  };
+
+  // Helper component for the hidden game items
+  const HiddenCore = ({ id, className }) => {
+    const isFound = foundCores.includes(id);
+    return (
+      <button
+        onClick={() => handleFindCore(id)}
+        disabled={isFound}
+        className={`absolute z-30 flex items-center justify-center transition-all duration-500 cursor-crosshair
+          ${isFound 
+            ? 'opacity-0 scale-150 pointer-events-none text-green-400' 
+            : `opacity-20 hover:opacity-100 hover:scale-125 animate-pulse text-cyan-400 hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] ${className}`
+          }`}
+        title="Hidden Data Core..."
+      >
+        <Cpu className="w-6 h-6" />
+      </button>
+    );
+  };
 
   // Smooth scroll handler
   const scrollTo = (id) => {
@@ -34,15 +72,46 @@ export default function App() {
           0%, 100% { transform: rotate(-3deg); }
           50% { transform: rotate(3deg); }
         }
+        @keyframes slideUpFade {
+          0% { transform: translate(-50%, 20px); opacity: 0; }
+          10%, 90% { transform: translate(-50%, 0); opacity: 1; }
+          100% { transform: translate(-50%, -20px); opacity: 0; }
+        }
         .animate-float { animation: float 6s ease-in-out infinite; }
         .animate-float-delayed { animation: float-delayed 7s ease-in-out infinite 1s; }
         .hover-wiggle:hover { animation: wiggle 0.4s ease-in-out infinite; }
+        .animate-win-message { animation: slideUpFade 6s ease-in-out forwards; }
       `}</style>
 
       {/* Playful Background Blobs */}
       <div className="fixed top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-blue-200/20 blur-3xl animate-float -z-10 pointer-events-none"></div>
       <div className="fixed bottom-[-10%] right-[-10%] w-[35vw] h-[35vw] rounded-full bg-purple-200/20 blur-3xl animate-float-delayed -z-10 pointer-events-none"></div>
       <div className="fixed top-[40%] left-[60%] w-[25vw] h-[25vw] rounded-full bg-cyan-200/20 blur-3xl animate-float -z-10 pointer-events-none" style={{ animationDelay: '2s' }}></div>
+
+      {/* Game Progress Widget (Slides in after finding the first one) */}
+      <div className={`fixed bottom-6 right-6 z-50 bg-slate-900/95 backdrop-blur-sm text-white px-5 py-3 rounded-2xl shadow-2xl border border-slate-700 transition-all duration-700 ease-out ${foundCores.length > 0 ? 'translate-y-0 opacity-100' : 'translate-y-24 opacity-0 pointer-events-none'}`}>
+        <div className="flex items-center gap-3">
+          <div className="relative">
+            <Cpu className={`w-6 h-6 ${foundCores.length === 5 ? 'text-green-400' : 'text-cyan-400 animate-pulse'}`} />
+            {foundCores.length === 5 && <CheckCircle2 className="w-4 h-4 text-green-400 absolute -bottom-1 -right-1 bg-slate-900 rounded-full" />}
+          </div>
+          <div className="font-bold text-sm tracking-wide">
+            Data Cores: <span className={foundCores.length === 5 ? 'text-green-400' : 'text-cyan-400'}>{foundCores.length}/5</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Win Modal Overlay */}
+      {showWinMessage && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center pointer-events-none">
+          <div className="absolute inset-0 bg-slate-900/20 backdrop-blur-sm animate-win-message"></div>
+          <div className="bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 text-white px-10 py-8 rounded-[2rem] shadow-[0_0_50px_rgba(6,182,212,0.5)] border border-white/20 flex flex-col items-center animate-win-message z-10">
+            <Award className="w-16 h-16 text-yellow-300 mb-4 animate-bounce" />
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-center tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-100">Architecture Mastered!</h2>
+            <p className="font-medium text-blue-100 text-lg">You fully debugged the site and found all 5 Data Cores.</p>
+          </div>
+        </div>
+      )}
 
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-white/70 backdrop-blur-lg z-50 border-b border-slate-200/50 shadow-[0_4px_30px_rgba(0,0,0,0.03)]">
@@ -88,8 +157,10 @@ export default function App() {
             <h2 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500 mb-6">
               Biomedical Engineer & PhD Researcher
             </h2>
-            <p className="text-lg text-slate-600 leading-relaxed mb-8 max-w-xl font-medium">
+            <p className="text-lg text-slate-600 leading-relaxed mb-8 max-w-xl font-medium relative">
               MEng Electrical Engineer and UCL PhD Researcher/Biomedical Engineer specializing in medical instrumentation and embedded systems. Blending advanced technical rigor with proven operational leadership to deliver critical healthcare technologies.
+              {/* Game Item 1: Tucked near the paragraph */}
+              <HiddenCore id="core-1" className="-left-8 top-2" />
             </p>
             
             <div className="flex flex-wrap gap-4 mb-8">
@@ -113,7 +184,7 @@ export default function App() {
             {/* Abstract Tech/Bio Graphic Placeholder */}
             <div className="aspect-square rounded-full bg-gradient-to-tr from-blue-100 via-indigo-50 to-cyan-100 relative p-8 shadow-2xl shadow-blue-900/10 border-4 border-white group hover:scale-105 transition-transform duration-500">
               <div className="absolute inset-0 bg-white/40 rounded-full backdrop-blur-3xl border border-white/80"></div>
-              <div className="relative h-full w-full border-4 border-dashed border-blue-300 rounded-full flex flex-col items-center justify-center text-blue-400 group-hover:border-indigo-400 group-hover:rotate-12 transition-all duration-700">
+              <div className="relative h-full w-full border-4 border-dashed border-blue-300 rounded-full flex flex-col items-center justify-center text-blue-400 transition-all duration-700">
                  <Activity className="w-24 h-24 mb-4 text-blue-500 opacity-80 group-hover:animate-pulse" />
                  <Cpu className="w-16 h-16 absolute top-1/4 left-1/4 text-cyan-400 opacity-60 group-hover:-translate-x-4 group-hover:-translate-y-4 transition-transform duration-500" />
                  <Code className="w-16 h-16 absolute bottom-1/4 right-1/4 text-indigo-400 opacity-60 group-hover:translate-x-4 group-hover:translate-y-4 transition-transform duration-500" />
@@ -126,8 +197,8 @@ export default function App() {
       {/* Experience Section */}
       <section id="experience" className="py-24 bg-white/80 backdrop-blur-sm border-t border-slate-100 relative">
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center mb-16 group">
-            <div className="bg-blue-100 p-3 rounded-2xl mr-4 group-hover:-rotate-12 group-hover:scale-110 transition-transform">
+          <div className="flex items-center mb-16 group relative">
+            <div className="bg-blue-100 p-3 rounded-2xl mr-4 group-hover:-translate-y-1 transition-transform">
               <Briefcase className="w-8 h-8 text-blue-600" />
             </div>
             <h2 className="text-4xl font-extrabold text-slate-900 tracking-tight">Professional Experience</h2>
@@ -171,7 +242,7 @@ export default function App() {
                 <div className="mb-4 md:mb-0 text-slate-500 font-bold pt-2 md:text-right md:pr-8 tracking-wide">
                   2023 — Present
                 </div>
-                <div className="md:col-span-3 bg-white border-2 border-slate-100 rounded-3xl p-8 shadow-sm group-hover/card:shadow-2xl group-hover/card:border-indigo-200 group-hover/card:-translate-y-2 transition-all duration-300">
+                <div className="md:col-span-3 bg-white border-2 border-slate-100 rounded-3xl p-8 shadow-sm group-hover/card:shadow-2xl group-hover/card:border-indigo-200 group-hover/card:-translate-y-2 transition-all duration-300 relative">
                   <h3 className="text-2xl font-extrabold text-slate-900 group-hover/card:text-indigo-700 transition-colors">Post Graduate Teaching Assistant (Medical Instrumentation)</h3>
                   <div className="text-indigo-600 font-bold mb-6 inline-block bg-indigo-50 px-3 py-1 rounded-lg mt-2">University College London (UCL), London</div>
                   <ul className="space-y-4 text-slate-600 list-none font-medium">
@@ -191,8 +262,10 @@ export default function App() {
             {/* DNA Nudge */}
             <div className="relative pl-8 md:pl-0 group/card">
               <div className="md:grid md:grid-cols-4 md:gap-8 items-start">
-                <div className="mb-4 md:mb-0 text-slate-500 font-bold pt-2 md:text-right md:pr-8 tracking-wide">
+                <div className="mb-4 md:mb-0 text-slate-500 font-bold pt-2 md:text-right md:pr-8 tracking-wide relative">
                   2021 — 2022
+                  {/* Game Item 2: Hiding next to the DNA Nudge date */}
+                  <HiddenCore id="core-2" className="right-4 top-10 md:-right-6 md:top-2 text-cyan-500" />
                 </div>
                 <div className="md:col-span-3 bg-white border-2 border-slate-100 rounded-3xl p-8 shadow-sm group-hover/card:shadow-2xl group-hover/card:border-cyan-200 group-hover/card:-translate-y-2 transition-all duration-300">
                   <h3 className="text-2xl font-extrabold text-slate-900 group-hover/card:text-cyan-700 transition-colors">Embedded Systems Engineer</h3>
@@ -249,8 +322,8 @@ export default function App() {
       {/* Projects Section */}
       <section id="projects" className="py-24 bg-slate-50/50 backdrop-blur-sm relative">
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center mb-16 group">
-            <div className="bg-indigo-100 p-3 rounded-2xl mr-4 group-hover:scale-110 group-hover:rotate-12 transition-transform">
+          <div className="flex items-center mb-16 group relative">
+            <div className="bg-indigo-100 p-3 rounded-2xl mr-4 group-hover:-translate-y-1 transition-transform">
               <FolderKanban className="w-8 h-8 text-indigo-600 group-hover:animate-bounce" />
             </div>
             <h2 className="text-4xl font-extrabold text-slate-900 tracking-tight">Projects & Portfolio</h2>
@@ -325,7 +398,7 @@ export default function App() {
               </div>
             </div>
 
-              {/* Project Card with Bullet Points */}
+            {/* Project Card with Bullet Points */}
             <div className="bg-white rounded-[2rem] shadow-sm border-2 border-slate-100 overflow-hidden flex flex-col group hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] hover:-translate-y-3 hover:border-pink-200 transition-all duration-300">
               <div className="aspect-video bg-black relative overflow-hidden flex items-center justify-center">
                 <video 
@@ -351,13 +424,15 @@ export default function App() {
               </div>
             </div>
                 
-              <div className="bg-white rounded-[2rem] shadow-sm border-2 border-slate-100 overflow-hidden flex flex-col group hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] hover:-translate-y-3 hover:border-indigo-200 transition-all duration-300">
+            <div className="bg-white rounded-[2rem] shadow-sm border-2 border-slate-100 overflow-hidden flex flex-col group hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] hover:-translate-y-3 hover:border-indigo-200 transition-all duration-300">
               <div className="aspect-video bg-indigo-50 relative overflow-hidden flex items-center justify-center p-4">
                 <img 
                   src="/Rover.png" 
                   alt="PCB Electronics" 
                   className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700 drop-shadow-lg"
                 />
+                {/* Game Item 3: Hiding on the Rover image wrapper */}
+                <HiddenCore id="core-3" className="top-4 right-4 text-indigo-900" />
               </div>
               <div className="p-8 flex flex-col flex-grow bg-white">
                 <h3 className="text-2xl font-extrabold text-slate-900 mb-4 group-hover:text-indigo-700 transition-colors">Multi-Sensor Wi-Fi Rover (Personal Project)</h3>
@@ -438,11 +513,13 @@ export default function App() {
         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-100/50 rounded-full mix-blend-multiply blur-3xl -z-10 pointer-events-none"></div>
 
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center mb-16 group">
-            <div className="bg-cyan-100 p-3 rounded-2xl mr-4 group-hover:scale-110 group-hover:rotate-12 transition-transform">
+          <div className="flex items-center mb-16 group relative">
+            <div className="bg-cyan-100 p-3 rounded-2xl mr-4 group-hover:-translate-y-1 transition-transform">
               <Cpu className="w-8 h-8 text-cyan-600 group-hover:animate-pulse" />
             </div>
             <h2 className="text-4xl font-extrabold text-slate-900 tracking-tight">Technical Expertise</h2>
+            {/* Game Item 4: Tucked in the Skills title area */}
+            <HiddenCore id="core-4" className="ml-6 top-1 text-cyan-500" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -493,7 +570,7 @@ export default function App() {
             </div>
 
             {/* Core Competencies */}
-            <div className="bg-white p-8 rounded-[2rem] shadow-sm border-2 border-slate-100 md:col-span-2 lg:col-span-3 hover:border-indigo-200 hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+            <div className="bg-white p-8 rounded-[2rem] shadow-sm border-2 border-slate-100 md:col-span-2 lg:col-span-3 hover:border-indigo-200 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative">
               <div className="flex items-center mb-6 text-slate-900 group">
                 <div className="p-2 bg-indigo-50 rounded-xl mr-3 group-hover:scale-110 transition-transform">
                   <ShieldCheck className="w-7 h-7 text-indigo-500 group-hover:animate-pulse" />
@@ -519,7 +596,7 @@ export default function App() {
           {/* Education */}
           <div>
             <div className="flex items-center mb-12 group">
-              <div className="bg-blue-100 p-3 rounded-2xl mr-4 group-hover:-translate-y-1 group-hover:scale-110 transition-all">
+              <div className="bg-blue-100 p-3 rounded-2xl mr-4 group-hover:-translate-y-1 transition-all">
                 <GraduationCap className="w-8 h-8 text-blue-600 group-hover:animate-bounce" />
               </div>
               <h2 className="text-4xl font-extrabold text-slate-900 tracking-tight">Education</h2>
@@ -568,7 +645,7 @@ export default function App() {
           {/* Awards */}
           <div>
             <div className="flex items-center mb-12 group">
-              <div className="bg-amber-100 p-3 rounded-2xl mr-4 group-hover:-rotate-12 group-hover:scale-110 transition-all">
+              <div className="bg-amber-100 p-3 rounded-2xl mr-4 group-hover:-translate-y-1 transition-all">
                 <Award className="w-8 h-8 text-amber-500" />
               </div>
               <h2 className="text-4xl font-extrabold text-slate-900 tracking-tight">Awards</h2>
@@ -608,7 +685,7 @@ export default function App() {
 
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex items-center mb-16 group">
-            <div className="bg-cyan-900/50 p-3 rounded-2xl mr-4 group-hover:rotate-12 group-hover:scale-110 transition-transform">
+            <div className="bg-cyan-900/50 p-3 rounded-2xl mr-4 group-hover:-translate-y-1 transition-transform">
               <BookOpen className="w-8 h-8 text-cyan-400 group-hover:animate-pulse" />
             </div>
             <h2 className="text-4xl font-extrabold tracking-tight">Selected Publications</h2>
@@ -667,8 +744,12 @@ export default function App() {
 
       {/* Footer */}
       <footer className="bg-[#020617] py-16 text-center border-t border-slate-900 relative">
-        <div className="max-w-[1500px] mx-auto px-4">
-          <div className="flex justify-center space-x-6 mb-8">
+        <div className="max-w-[1500px] mx-auto px-4 relative">
+          
+          <div className="flex justify-center space-x-6 mb-8 relative">
+             {/* Game Item 5: Hiding in the footer */}
+            <HiddenCore id="core-5" className="-left-12 top-0" />
+            
             <a href="mailto:angelos.artemiou.23@alumni.ucl.ac.uk" className="group bg-slate-800 p-4 rounded-full text-slate-400 hover:text-white hover:bg-blue-600 hover:scale-110 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(37,99,235,0.5)] transition-all duration-300">
               <Mail className="w-6 h-6 group-hover:animate-bounce" />
               <span className="sr-only">Email</span>
