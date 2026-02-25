@@ -7,6 +7,7 @@ import {
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   // --- MINI-GAME STATE ---
   const [foundCores, setFoundCores] = useState([]);
@@ -105,10 +106,12 @@ export default function App() {
       {showWinMessage && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center pointer-events-none">
           <div className="absolute inset-0 bg-slate-900/20 backdrop-blur-sm animate-win-message"></div>
-          <div className="bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 text-white px-10 py-8 rounded-[2rem] shadow-[0_0_50px_rgba(6,182,212,0.5)] border border-white/20 flex flex-col items-center animate-win-message z-10">
-            <Award className="w-16 h-16 text-yellow-300 mb-4 animate-bounce" />
-            <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-center tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-100">Architecture Mastered!</h2>
-            <p className="font-medium text-blue-100 text-lg">You fully debugged the site and found all 5 Data Cores.</p>
+          <div className="bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 text-white px-6 py-8 md:px-10 rounded-[2rem] shadow-[0_0_50px_rgba(6,182,212,0.5)] border border-white/20 flex flex-col items-center animate-win-message z-10 mx-4 text-center">
+            <Award className="w-12 h-12 md:w-16 md:h-16 text-yellow-300 mb-4 animate-bounce" />
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-2 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-100">
+              Achievement Unlocked!<br className="md:hidden" /> Master Debugger
+            </h2>
+            <p className="font-medium text-blue-100 text-base md:text-lg">You fully debugged the site and found all 5 Data Cores.</p>
           </div>
         </div>
       )}
@@ -131,16 +134,43 @@ export default function App() {
                 </button>
               ))}
             </div>
-            {/* Mobile Menu Button - simplified for artifact */}
+            {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center">
-              <button className="text-slate-600 hover:text-blue-600 hover:scale-110 transition-transform hover-wiggle">
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
+              <button 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="text-slate-600 hover:text-blue-600 hover:scale-110 transition-transform hover-wiggle p-2"
+              >
+                {isMobileMenuOpen ? (
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
               </button>
             </div>
           </div>
         </div>
+        
+        {/* Mobile Dropdown Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-16 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-xl px-4 pt-2 pb-6 space-y-2 origin-top transition-all duration-200">
+            {['Home', 'Experience', 'Projects', 'Skills', 'Education', 'Publications'].map((item) => (
+              <button 
+                key={item}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  scrollTo(item.toLowerCase());
+                }}
+                className="block w-full text-left px-4 py-3 text-base font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded-xl transition-colors"
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
