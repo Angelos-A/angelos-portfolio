@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Mail, Phone, MapPin, ExternalLink, ChevronRight, 
   Briefcase, GraduationCap, Award, BookOpen, Cpu, Code, Activity, ShieldCheck,
-  FolderKanban, Download, CheckCircle2
+  FolderKanban, Download, CheckCircle2, Search
 } from 'lucide-react';
 
 export default function App() {
@@ -208,6 +208,17 @@ export default function App() {
               <div className="flex items-center hover:text-blue-600 hover:translate-x-1 transition-transform cursor-default"><Phone className="w-4 h-4 mr-2 text-indigo-400" /> +44 7719 447643</div>
               <div className="flex items-center hover:text-blue-600 hover:translate-x-1 transition-transform cursor-default"><Mail className="w-4 h-4 mr-2 text-cyan-400" /> angelos.artemiou.23@alumni.ucl.ac.uk</div>
             </div>
+
+            {/* Mini-game hint */}
+            <div className="mt-8 flex items-center p-4 bg-gradient-to-r from-cyan-50 to-blue-50 border border-cyan-100 rounded-2xl max-w-md shadow-sm relative z-20">
+              <div className="bg-white p-2 rounded-full mr-3 shadow-sm shrink-0">
+                <Search className="w-5 h-5 text-cyan-500 animate-pulse" />
+              </div>
+              <p className="text-sm font-medium text-slate-700">
+                <strong>System Alert:</strong> I've hidden <span className="text-cyan-600 font-bold">5 Data Cores</span> (<Cpu className="w-4 h-4 inline text-cyan-500 -mt-0.5 mx-0.5" />) around this page. Can you find them all?
+              </p>
+            </div>
+
           </div>
           
           <div className="relative hidden lg:block animate-float">
