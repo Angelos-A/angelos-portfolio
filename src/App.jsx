@@ -889,7 +889,8 @@ export default function App() {
               <div className="p-8 flex flex-col flex-grow bg-white">
                 <h3 className="text-2xl font-extrabold text-slate-900 mb-3 group-hover:text-rose-600 transition-colors">Salsa Dancing</h3>
                 <p className="text-slate-600 font-medium text-sm leading-relaxed mb-4">
-                  Whether it's hitting the social dance floor or learning complex new turn patterns, Salsa is my ultimate creative outlet. It challenges my rhythm, coordination, and ability to connect with others without saying a word. Replace these placeholder links with your own footage!
+                  Whether it's social dancing or performing, Salsa and Bachata are my favorite ways to step away from the lab and get out of my own head. 
+                  It's a completely different kind of challenge than engineering—one that relies purely on rhythm, being present in the moment, and connecting with people from all walks of life without saying a word.
                 </p>
               </div>
             </div>
@@ -907,7 +908,8 @@ export default function App() {
               <div className="p-8 flex flex-col flex-grow bg-white">
                 <h3 className="text-2xl font-extrabold text-slate-900 mb-3 group-hover:text-rose-600 transition-colors">Martial Arts</h3>
                 <p className="text-slate-600 font-medium text-sm leading-relaxed mb-4">
-                  A lifelong journey of discipline and physical conditioning. Martial arts has taught me the importance of resilience, focus, and continuous self-improvement both on and off the mats.
+                  I'm a lifelong martial arts practitioner, starting with  Wrestling and Muay Thai, and more recently, BJJ.
+                  For me, it's the ultimate physical and mental reset after a long day of research. More than anything, the mats have taught me how to leave my ego at the door—you quickly learn that the only way to master something difficult is to show up consistently and be okay with failing a lot before you succeed.
                 </p>
               </div>
             </div>
