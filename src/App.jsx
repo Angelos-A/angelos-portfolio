@@ -269,7 +269,8 @@ export default function App() {
               Biomedical Engineer & PhD Researcher
             </h2>
             <p className="text-lg text-slate-600 leading-relaxed mb-8 max-w-xl font-medium relative">
-              MEng Electrical Engineer and UCL PhD Researcher/Biomedical Engineer specializing in medical instrumentation and embedded systems. Blending advanced technical rigor with proven operational leadership to deliver critical healthcare technologies.
+              With an MEng in Electrical & Electronic Engineering (Imperial) and an MRes in Medical Imaging (UCL), I specialize in medical instrumentation and embedded systems. 
+              I blend elite technical rigor with proven operational leadership to design, build, and deploy MedTech solutions.
               {/* Game Item 1: Tucked near the paragraph */}
               <HiddenCore id="core-1" className="-left-8 top-2" />
             </p>
@@ -304,13 +305,21 @@ export default function App() {
           
           <div className="relative hidden lg:block animate-float">
             {/* Abstract Tech/Bio Graphic Placeholder */}
-            <div className="aspect-square rounded-full bg-gradient-to-tr from-blue-100 via-indigo-50 to-cyan-100 relative p-8 shadow-2xl shadow-blue-900/10 border-4 border-white group hover:scale-105 transition-transform duration-500">
+            {/* <div className="aspect-square rounded-full bg-gradient-to-tr from-blue-100 via-indigo-50 to-cyan-100 relative p-8 shadow-2xl shadow-blue-900/10 border-4 border-white group hover:scale-105 transition-transform duration-500">
               <div className="absolute inset-0 bg-white/40 rounded-full backdrop-blur-3xl border border-white/80"></div>
               <div className="relative h-full w-full border-4 border-dashed border-blue-300 rounded-full flex flex-col items-center justify-center text-blue-400 transition-all duration-700">
                  <Activity className="w-24 h-24 mb-4 text-blue-500 opacity-80 group-hover:animate-pulse" />
                  <Cpu className="w-16 h-16 absolute top-1/4 left-1/4 text-cyan-400 opacity-60 group-hover:-translate-x-4 group-hover:-translate-y-4 transition-transform duration-500" />
                  <Code className="w-16 h-16 absolute bottom-1/4 right-1/4 text-indigo-400 opacity-60 group-hover:translate-x-4 group-hover:translate-y-4 transition-transform duration-500" />
               </div>
+            </div> */}
+
+            <div className="relative hidden lg:block animate-float">
+              <img 
+                src="/profile_photo.jpg" 
+                alt="Angelos Artemiou" 
+                className="aspect-square w-full max-w-md mx-auto rounded-full object-cover shadow-2xl border-4 border-white group hover:scale-105 transition-transform duration-500"
+              />
             </div>
           </div>
         </div>
