@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Mail, Phone, MapPin, ExternalLink, ChevronRight, ChevronLeft,
   Briefcase, GraduationCap, Award, BookOpen, Cpu, Code, Activity, ShieldCheck,
-  FolderKanban, Download, CheckCircle2, Search, Compass, Camera, Video
+  FolderKanban, Download, CheckCircle2, Search, Compass, Camera, Video, 
 } from 'lucide-react';
 
 // --- CUSTOM HOBBY MEDIA CAROUSEL COMPONENT ---
@@ -83,6 +83,20 @@ const HobbyMedia = ({ media }) => {
   );
 };
 
+const GithubIcon = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.48-1.54 6.48-7.14a5.46 5.46 0 0 0-1.53-3.8 5.07 5.07 0 0 0-.16-3.75s-1.2-.38-3.9 1.4a13.28 13.28 0 0 0-7 0C6.2 2.12 5 2.5 5 2.5a5.07 5.07 0 0 0-.16 3.75 5.46 5.46 0 0 0-1.53 3.8c0 5.6 3.34 6.78 6.48 7.14a4.8 4.8 0 0 0-1 3.02v4"></path>
+    <path d="M9 20a5.5 5.5 0 0 1-4-2.5"></path>
+  </svg>
+);
+
+const LinkedinIcon = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+    <rect x="2" y="9" width="4" height="12"></rect>
+    <circle cx="4" cy="4" r="2"></circle>
+  </svg>
+);
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -283,12 +297,30 @@ export default function App() {
               <a href="#experience" onClick={(e) => { e.preventDefault(); scrollTo('experience'); }} className="group inline-flex items-center px-7 py-3.5 rounded-2xl bg-white border-2 border-slate-200 text-slate-700 font-bold hover:border-blue-300 hover:text-blue-600 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all">
                 View Experience
               </a>
+
+              {/* NEW: Download CV Button */}
+              <a href="/CV.pdf" download className="group inline-flex items-center px-7 py-3.5 rounded-2xl bg-slate-900 text-white font-bold hover:bg-slate-800 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/20 active:scale-95 transition-all">
+                <Download className="w-5 h-5 mr-2 group-hover:-translate-y-1 transition-transform" />
+                Download CV
+              </a>
+              
             </div>
+
+            
 
             <div className="flex flex-col space-y-3 text-sm text-slate-500 font-medium bg-white/50 p-6 rounded-3xl border border-white shadow-sm inline-block backdrop-blur-sm hover:shadow-md transition-shadow">
               <div className="flex items-center hover:text-blue-600 hover:translate-x-1 transition-transform cursor-default"><MapPin className="w-4 h-4 mr-2 text-blue-400" /> London, N14 6JS</div>
               <div className="flex items-center hover:text-blue-600 hover:translate-x-1 transition-transform cursor-default"><Phone className="w-4 h-4 mr-2 text-indigo-400" /> +44 7719 447643</div>
               <div className="flex items-center hover:text-blue-600 hover:translate-x-1 transition-transform cursor-default"><Mail className="w-4 h-4 mr-2 text-cyan-400" /> angelos.artemiou.23@alumni.ucl.ac.uk</div>
+            </div>
+
+            <div className="flex gap-4 mt-6">
+              <a href="www.linkedin.com/in/angelos-artemiou-311a6b267" target="_blank" rel="noreferrer" className="p-3 bg-white/50 backdrop-blur-sm border border-white rounded-2xl text-blue-600 hover:bg-blue-600 hover:text-white hover:scale-110 hover:-translate-y-1 transition-all shadow-sm">
+                <LinkedinIcon className="w-6 h-6" />
+              </a>
+              <a href="https://github.com/Angelos-A" target="_blank" rel="noreferrer" className="p-3 bg-white/50 backdrop-blur-sm border border-white rounded-2xl text-slate-800 hover:bg-slate-900 hover:text-white hover:scale-110 hover:-translate-y-1 transition-all shadow-sm">
+                <GithubIcon className="w-6 h-6" />
+              </a>
             </div>
 
             {/* Mini-game hint */}
@@ -426,7 +458,7 @@ export default function App() {
                   2017 — 2018
                 </div>
                 <div className="md:col-span-3 bg-white border-2 border-slate-100 rounded-3xl p-8 shadow-sm group-hover/card:shadow-2xl group-hover/card:border-emerald-200 group-hover/card:-translate-y-2 transition-all duration-300">
-                  <h3 className="text-2xl font-extrabold text-slate-900 group-hover/card:text-emerald-700 transition-colors">Artillery Technical Officer (2nd Lieutenant)</h3>
+                  <h3 className="text-2xl font-extrabold text-slate-900 group-hover/card:text-emerald-700 transition-colors">Artillery Officer (2nd Lieutenant)</h3>
                   <div className="text-emerald-600 font-bold mb-6 inline-block bg-emerald-50 px-3 py-1 rounded-lg mt-2">Cypriot National Guard, Cyprus</div>
                   <ul className="space-y-4 text-slate-600 list-none font-medium">
                     <li className="flex items-start group/item">
@@ -940,6 +972,16 @@ export default function App() {
               <span className="sr-only">Email</span>
             </a>
             {/* Add LinkedIn / GitHub links here when available */}
+
+            <a href="www.linkedin.com/in/angelos-artemiou-311a6b267" target="_blank" rel="noreferrer" className="group bg-slate-800 p-4 rounded-full text-slate-400 hover:text-white hover:bg-blue-600 hover:scale-110 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(37,99,235,0.5)] transition-all duration-300">
+              <LinkedinIcon className="w-6 h-6 group-hover:animate-bounce" />
+              <span className="sr-only">LinkedIn</span>
+            </a>
+            
+            <a href="https://github.com/Angelos-A" target="_blank" rel="noreferrer" className="group bg-slate-800 p-4 rounded-full text-slate-400 hover:text-white hover:bg-slate-600 hover:scale-110 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all duration-300">
+              <GithubIcon className="w-6 h-6 group-hover:animate-bounce" />
+              <span className="sr-only">GitHub</span>
+            </a>
           </div>
           <p className="text-slate-500 text-sm font-medium">
             © {new Date().getFullYear()} Angelos Artemiou. All rights reserved.
