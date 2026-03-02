@@ -315,7 +315,7 @@ export default function App() {
             </div>
 
             <div className="flex gap-4 mt-6">
-              <a href="www.linkedin.com/in/angelos-artemiou-311a6b267" target="_blank" rel="noreferrer" className="p-3 bg-white/50 backdrop-blur-sm border border-white rounded-2xl text-blue-600 hover:bg-blue-600 hover:text-white hover:scale-110 hover:-translate-y-1 transition-all shadow-sm">
+              <a href="https://www.linkedin.com/in/angelos-artemiou-311a6b267" target="_blank" rel="noreferrer" className="p-3 bg-white/50 backdrop-blur-sm border border-white rounded-2xl text-blue-600 hover:bg-blue-600 hover:text-white hover:scale-110 hover:-translate-y-1 transition-all shadow-sm">
                 <LinkedinIcon className="w-6 h-6" />
               </a>
               <a href="https://github.com/Angelos-A" target="_blank" rel="noreferrer" className="p-3 bg-white/50 backdrop-blur-sm border border-white rounded-2xl text-slate-800 hover:bg-slate-900 hover:text-white hover:scale-110 hover:-translate-y-1 transition-all shadow-sm">
@@ -973,7 +973,7 @@ export default function App() {
             </a>
             {/* Add LinkedIn / GitHub links here when available */}
 
-            <a href="www.linkedin.com/in/angelos-artemiou-311a6b267" target="_blank" rel="noreferrer" className="group bg-slate-800 p-4 rounded-full text-slate-400 hover:text-white hover:bg-blue-600 hover:scale-110 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(37,99,235,0.5)] transition-all duration-300">
+            <a href="https://www.linkedin.com/in/angelos-artemiou-311a6b267" target="_blank" rel="noreferrer" className="group bg-slate-800 p-4 rounded-full text-slate-400 hover:text-white hover:bg-blue-600 hover:scale-110 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(37,99,235,0.5)] transition-all duration-300">
               <LinkedinIcon className="w-6 h-6 group-hover:animate-bounce" />
               <span className="sr-only">LinkedIn</span>
             </a>
