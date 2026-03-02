@@ -1,9 +1,87 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Mail, Phone, MapPin, ExternalLink, ChevronRight, 
+  Mail, Phone, MapPin, ExternalLink, ChevronRight, ChevronLeft,
   Briefcase, GraduationCap, Award, BookOpen, Cpu, Code, Activity, ShieldCheck,
-  FolderKanban, Download, CheckCircle2, Search
+  FolderKanban, Download, CheckCircle2, Search, Compass, Camera, Video
 } from 'lucide-react';
+
+// --- CUSTOM HOBBY MEDIA CAROUSEL COMPONENT ---
+const HobbyMedia = ({ media }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextMedia = (e) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev + 1) % media.length);
+  };
+  
+  const prevMedia = (e) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev - 1 + media.length) % media.length);
+  };
+
+  const current = media[currentIndex];
+
+  return (
+    <div className="aspect-[4/3] bg-slate-900 relative overflow-hidden group/media">
+      {/* Media Type Badge */}
+      <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md text-white p-2 rounded-full pointer-events-none z-10 shadow-sm transition-all duration-300">
+        {current.type === 'video' ? <Video className="w-4 h-4" /> : <Camera className="w-4 h-4" />}
+      </div>
+
+      {/* Main Media Display */}
+      {current.type === 'video' ? (
+        <video
+          key={current.src} // forces re-render when src changes
+          src={current.src}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+        />
+      ) : (
+        <img
+          key={current.src}
+          src={current.src}
+          alt={current.alt || "Hobby media"}
+          className="w-full h-full object-cover group-hover/media:scale-105 transition-transform duration-700"
+        />
+      )}
+
+      {/* Navigation Controls (Only show if multiple media items exist) */}
+      {media.length > 1 && (
+        <>
+          <button 
+            onClick={prevMedia} 
+            className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 bg-black/40 text-white rounded-full opacity-0 group-hover/media:opacity-100 hover:bg-black/70 transition-all z-10 hover:scale-110"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button 
+            onClick={nextMedia} 
+            className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 bg-black/40 text-white rounded-full opacity-0 group-hover/media:opacity-100 hover:bg-black/70 transition-all z-10 hover:scale-110"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+          
+          {/* Indicators */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 bg-black/40 backdrop-blur-sm px-3 py-2 rounded-full z-10">
+            {media.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentIndex(idx);
+                }}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === currentIndex ? 'bg-white scale-125' : 'bg-white/40 hover:bg-white/80'}`}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -55,6 +133,9 @@ export default function App() {
       setActiveSection(id);
     }
   };
+
+  // Navigation Items Array
+  const navItems = ['Home', 'Experience', 'Projects', 'Skills', 'Education', 'Publications', 'Hobbies'];
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-200 selection:text-blue-900 overflow-hidden relative">
@@ -123,8 +204,8 @@ export default function App() {
             <div className="font-extrabold text-xl tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-indigo-600 hover:scale-110 hover:-rotate-2 transition-transform cursor-pointer">
               A. Artemiou
             </div>
-            <div className="hidden md:flex space-x-8">
-              {['Home', 'Experience', 'Projects', 'Skills', 'Education', 'Publications'].map((item) => (
+            <div className="hidden md:flex space-x-6 lg:space-x-8">
+              {navItems.map((item) => (
                 <button 
                   key={item}
                   onClick={() => scrollTo(item.toLowerCase())}
@@ -157,7 +238,7 @@ export default function App() {
         {/* Mobile Dropdown Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-16 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-xl px-4 pt-2 pb-6 space-y-2 origin-top transition-all duration-200">
-            {['Home', 'Experience', 'Projects', 'Skills', 'Education', 'Publications'].map((item) => (
+            {navItems.map((item) => (
               <button 
                 key={item}
                 onClick={() => {
@@ -421,7 +502,7 @@ export default function App() {
               <div className="p-8 flex flex-col flex-grow bg-white">
                 <h3 className="text-2xl font-extrabold text-slate-900 mb-4 group-hover:text-cyan-700 transition-colors">Custom Vector Network Analyzer for Respiratory Plethysmography Applications</h3>
                 <ul className="list-disc pl-5 text-slate-600 font-medium text-sm mb-6 flex-grow space-y-2 marker:text-cyan-500">
-                  <li><strong className="text-slate-800">Embedded Systems Architecture:</strong> Architected and developed a complete low-power readout system for a novel 3D-knitted respiratory inductance plethysmography (RIP) sensor, achieving accuracy comparable to clinical-grade component analyzers.</li>
+                  <li><strong className="text-slate-800">Embedded Systems Architecture:</strong> Architected and developed a complete low-power readout system for a novel 3D-knitted respiratory inductance plethysmography (RIP) sensor, achieving accuracy comparable to commercial component analyzers.</li>
                   <li><strong className="text-slate-800">Full-Stack Implementation:</strong>
                       <ul className="pl-4 mt-2 space-y-1 text-slate-500">
                           <li><em className="font-semibold">DSP & Firmware:</em> Engineered bare-metal C firmware for an <strong>STM32</strong> microcontroller. Implemented custom DSP pipelines utilizing <strong>Goertzel's Algorithm</strong> and intentional undersampling techniques to extract high-frequency impedance data with minimal power draw. Optimized ADC data pipelines using <strong>Direct Memory Access (DMA)</strong>.</li>
@@ -776,6 +857,58 @@ export default function App() {
                     View DOI <ExternalLink className="w-4 h-4 ml-2" />
                   </a>
                 </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* Hobbies Section - NEWLY UPDATED WITH INTERACTIVE CAROUSEL */}
+      <section id="hobbies" className="py-24 bg-slate-50/50 backdrop-blur-sm border-t border-slate-200 relative">
+        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="flex items-center mb-16 group relative">
+            <div className="bg-rose-100 p-3 rounded-2xl mr-4 group-hover:-translate-y-1 transition-transform">
+              <Compass className="w-8 h-8 text-rose-600 group-hover:animate-pulse" />
+            </div>
+            <h2 className="text-4xl font-extrabold text-slate-900 tracking-tight">Beyond Engineering</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            
+            {/* Salsa Dancing Card */}
+            <div className="bg-white rounded-[2rem] shadow-sm border-2 border-slate-100 overflow-hidden flex flex-col group hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] hover:-translate-y-3 hover:border-rose-200 transition-all duration-300">
+              <HobbyMedia 
+                media={[
+                  { type: 'image', src: '/salsa1.jpg', alt: 'Salsa1' },
+                  { type: 'image', src: '/salsa2.jpg', alt: 'Salsa2' },
+                //  { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                ]} 
+              />
+              <div className="p-8 flex flex-col flex-grow bg-white">
+                <h3 className="text-2xl font-extrabold text-slate-900 mb-3 group-hover:text-rose-600 transition-colors">Salsa Dancing</h3>
+                <p className="text-slate-600 font-medium text-sm leading-relaxed mb-4">
+                  Whether it's hitting the social dance floor or learning complex new turn patterns, Salsa is my ultimate creative outlet. It challenges my rhythm, coordination, and ability to connect with others without saying a word. Replace these placeholder links with your own footage!
+                </p>
+              </div>
+            </div>
+
+            {/* Martial Arts Card */}
+            <div className="bg-white rounded-[2rem] shadow-sm border-2 border-slate-100 overflow-hidden flex flex-col group hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] hover:-translate-y-3 hover:border-rose-200 transition-all duration-300">
+              <HobbyMedia 
+                media={[
+                  { type: 'image', src: '/bjj_mirror.jpg', alt: 'Martial Arts' },
+                  { type: 'image', src: '/bjj2.jpg', alt: 'bjj2' },
+                  { type: 'image', src: '/mma.jpg', alt: 'mma1' },
+            //      { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                ]} 
+              />
+              <div className="p-8 flex flex-col flex-grow bg-white">
+                <h3 className="text-2xl font-extrabold text-slate-900 mb-3 group-hover:text-rose-600 transition-colors">Martial Arts</h3>
+                <p className="text-slate-600 font-medium text-sm leading-relaxed mb-4">
+                  A lifelong journey of discipline and physical conditioning. Martial arts has taught me the importance of resilience, focus, and continuous self-improvement both on and off the mats.
+                </p>
               </div>
             </div>
 
