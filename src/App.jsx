@@ -272,7 +272,7 @@ export default function App() {
               {/* Dark Mode Toggle Button */}
               <button 
                 onClick={toggleDarkMode}
-                className="p-2 rounded-full text-slate-500 hover:text-blue-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-cyan-400 dark:hover:bg-slate-800 transition-colors"
+                className="p-2.5 rounded-full bg-slate-900 text-white shadow-md hover:bg-slate-700 hover:scale-110 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 dark:hover:text-cyan-400 transition-all"
               >
                 {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
