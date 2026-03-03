@@ -359,7 +359,7 @@ export default function App() {
             
 
             <div className="flex flex-col space-y-3 text-sm text-slate-500 dark:text-slate-400 font-medium bg-white/50 dark:bg-slate-800/50 p-6 rounded-3xl border border-white dark:border-slate-700 shadow-sm inline-block backdrop-blur-sm hover:shadow-md transition-shadow">
-              <div className="flex items-center hover:text-blue-600 dark:hover:text-cyan-400 hover:translate-x-1 transition-transform cursor-default"><MapPin className="w-4 h-4 mr-2 text-blue-400" /> London, N14 6JS</div>
+              <div className="flex items-center hover:text-blue-600 dark:hover:text-cyan-400 hover:translate-x-1 transition-transform cursor-default"><MapPin className="w-4 h-4 mr-2 text-blue-400" /> London</div>
               <div className="flex items-center hover:text-blue-600 dark:hover:text-cyan-400 hover:translate-x-1 transition-transform cursor-default"><Phone className="w-4 h-4 mr-2 text-indigo-400" /> +44 7719 447643</div>
               <div className="flex items-center hover:text-blue-600 dark:hover:text-cyan-400 hover:translate-x-1 transition-transform cursor-default"><Mail className="w-4 h-4 mr-2 text-cyan-400" /> angelos.artemiou.23@alumni.ucl.ac.uk</div>
             </div>
