@@ -683,7 +683,7 @@ export default function App() {
              <div className="bg-white dark:bg-slate-900 rounded-[2rem] shadow-sm border-2 border-slate-100 dark:border-slate-800 overflow-hidden flex flex-col group hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:-translate-y-3 hover:border-emerald-200 dark:hover:border-emerald-500/50 transition-all duration-300">
               <div className="aspect-video bg-slate-800 relative overflow-hidden flex items-center justify-center">
                 <img 
-                  src="/nas.jpg" 
+                  src="/raspi_nas_pic.avif" 
                   alt="NAS" 
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100"
                 />
