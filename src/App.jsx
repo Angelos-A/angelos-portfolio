@@ -735,11 +735,11 @@ export default function App() {
                 </div>
                 <h3 className="text-xl font-extrabold">Programming</h3>
               </div>
-              <div className="flex flex-wrap gap-2.5">
-                {['Python', 'C / C++', 'MATLAB', 'Simulink', 'VHDL', 'NumPy', 'SciPy', 'Pandas'].map(skill => (
-                  <span key={skill} className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl text-sm font-bold hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 hover:text-white dark:hover:text-white hover:scale-110 hover:shadow-lg transition-all cursor-crosshair duration-200">{skill}</span>
-                ))}
-              </div>
+             <div className="flex flex-wrap gap-2.5">
+              {['C', 'C++', 'MATLAB', 'Simulink', 'Docker', 'Kubernetes', 'React', 'Node.js'].map(skill => (
+                <span key={skill} className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl text-sm font-bold hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 hover:text-white dark:hover:text-white hover:scale-110 hover:shadow-lg transition-all cursor-crosshair duration-200">{skill}</span>
+              ))}
+            </div>
             </div>
 
             {/* Electronics Design */}
@@ -751,10 +751,22 @@ export default function App() {
                 <h3 className="text-xl font-extrabold">Electronics & Hardware</h3>
               </div>
               <div className="flex flex-wrap gap-2.5">
-                {['Altium Designer', 'KiCAD', 'LTspice', 'IC Design (Cadence)', 'ARM', 'Arduino', 'PCB Layout', 'Oscilloscope'].map(skill => (
+                {[
+                  'Altium Designer',
+                  'KiCAD',
+                  'LTspice',
+                  'Integrated Circuit (IC) Design (Cadence Virtuoso)',
+                  'ARM',
+                  'STM32',
+                  'Arduino',
+                  'PIC',
+                  'SystemVerilog',
+                  'SolidWorks',
+                  'Fusion360'
+                ].map(skill => (
                   <span key={skill} className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl text-sm font-bold hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-500 hover:text-white dark:hover:text-white hover:scale-110 hover:shadow-lg transition-all cursor-crosshair duration-200">{skill}</span>
                 ))}
-              </div>
+                </div>
             </div>
 
             {/* Biomedical */}
