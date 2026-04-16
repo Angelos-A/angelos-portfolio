@@ -736,7 +736,7 @@ export default function App() {
                 <h3 className="text-xl font-extrabold">Programming</h3>
               </div>
              <div className="flex flex-wrap gap-2.5">
-              {['C', 'C++', 'MATLAB', 'Simulink', 'Docker', 'Kubernetes', 'React', 'Node.js'].map(skill => (
+              {['C', 'C++', 'MATLAB', 'Simulink', 'Docker', 'Kubernetes', 'React', 'Node.js', 'DevOps'].map(skill => (
                 <span key={skill} className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl text-sm font-bold hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 hover:text-white dark:hover:text-white hover:scale-110 hover:shadow-lg transition-all cursor-crosshair duration-200">{skill}</span>
               ))}
             </div>
