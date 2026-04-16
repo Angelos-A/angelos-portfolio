@@ -349,7 +349,7 @@ export default function App() {
               </a>
 
               {/* NEW: Download CV Button */}
-              <a href="/CV.pdf" download className="group inline-flex items-center px-7 py-3.5 rounded-2xl bg-slate-900 dark:bg-slate-700 text-white font-bold hover:bg-slate-800 dark:hover:bg-slate-600 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/20 active:scale-95 transition-all">
+              <a href="/Angelos Artemiou CV.pdf" download className="group inline-flex items-center px-7 py-3.5 rounded-2xl bg-slate-900 dark:bg-slate-700 text-white font-bold hover:bg-slate-800 dark:hover:bg-slate-600 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/20 active:scale-95 transition-all">
                 <Download className="w-5 h-5 mr-2 group-hover:-translate-y-1 transition-transform" />
                 Download CV
               </a>
