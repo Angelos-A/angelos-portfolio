@@ -736,10 +736,18 @@ export default function App() {
                 <h3 className="text-xl font-extrabold">Programming</h3>
               </div>
              <div className="flex flex-wrap gap-2.5">
-              {['C', 'C++', 'MATLAB', 'Simulink', 'Docker', 'Kubernetes', 'React', 'Node.js', 'DevOps'].map(skill => (
-                <span key={skill} className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl text-sm font-bold hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 hover:text-white dark:hover:text-white hover:scale-110 hover:shadow-lg transition-all cursor-crosshair duration-200">{skill}</span>
-              ))}
-            </div>
+                {[
+                  'Python (6+ yrs)',
+                  'C/C++ (6+ yrs)',
+                  'MATLAB & Simulink (5+ yrs)',
+                  'Node.js (2+ yrs)',
+                  'React (2+ yrs)',
+                  'Docker/Kubernetes (2 yrs)',
+                  'DevOps (2 yrs)'
+                ].map(skill => (
+                  <span key={skill} className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl text-sm font-bold hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 hover:text-white dark:hover:text-white hover:scale-110 hover:shadow-lg transition-all cursor-crosshair duration-200">{skill}</span>
+                ))}
+              </div>
             </div>
 
             {/* Electronics Design */}
@@ -751,21 +759,18 @@ export default function App() {
                 <h3 className="text-xl font-extrabold">Electronics & Hardware</h3>
               </div>
               <div className="flex flex-wrap gap-2.5">
-                {[
-                  'Altium Designer',
-                  'KiCAD',
-                  'LTspice',
-                  'Integrated Circuit (IC) Design (Cadence Virtuoso)',
-                  'ARM',
-                  'STM32',
-                  'Arduino',
-                  'PIC',
-                  'SystemVerilog',
-                  'SolidWorks',
-                  'Fusion360'
-                ].map(skill => (
-                  <span key={skill} className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl text-sm font-bold hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-500 hover:text-white dark:hover:text-white hover:scale-110 hover:shadow-lg transition-all cursor-crosshair duration-200">{skill}</span>
-                ))}
+                  {[
+                    'Altium Designer (3+ yrs)',
+                    'KiCAD',
+                    'LTspice',
+                    'IC Design (Cadence) (1 yr)',
+                    'ARM/STM32 (4+ yrs)',
+                    'Arduino (4+ yrs)',
+                    'PIC (4+ yrs)',
+                    'SystemVerilog (2 yrs)'
+                  ].map(skill => (
+                    <span key={skill} className="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl text-sm font-bold hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-500 hover:text-white dark:hover:text-white hover:scale-110 hover:shadow-lg transition-all cursor-crosshair duration-200">{skill}</span>
+                  ))}
                 </div>
             </div>
 
